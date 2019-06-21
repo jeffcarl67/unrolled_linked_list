@@ -13,7 +13,7 @@ void test_traverse(struct list_head *list, int num);
 int main() {
   struct list_head list1;
   int i;
-  for (i = 1; i < 1000000000; i *= 10) {
+  for (i = 0; i < 1000000; i += 1000) {
     test_traverse(&list1, i);
   }
 
@@ -40,7 +40,7 @@ void test_traverse(struct list_head *list, int num) {
   list_for_each_entry(entry, list, list) {}
   gettimeofday(&end, NULL);
   timersub(&end, &start, &result);
-  printf("%lu %lu\n", result.tv_sec, result.tv_usec);
+  printf("%d %lu %lu\n", num, result.tv_sec, result.tv_usec);
 
   list_for_each_entry_safe(entry, next, list, list) {
     list_del(&entry->list);
